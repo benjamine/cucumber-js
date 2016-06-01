@@ -2,7 +2,7 @@ require('../../support/spec_helper');
 
 describe("Cucumber.Runtime.AstTreeWalker", function () {
   var Cucumber = requireLib('cucumber');
-  var beforeStepCollection, afterStepCollection, emptyHook;
+  var emptyHook;
   var treeWalker, features, feature1, feature2, supportCodeLibrary, listeners, supportListeners, options;
 
   var createListener = function createListener(name) {
@@ -22,9 +22,6 @@ describe("Cucumber.Runtime.AstTreeWalker", function () {
     options              = {};
     spyOnStub(supportCodeLibrary, 'getListeners').and.returnValue(supportListeners);
 
-    beforeStepCollection = createSpyWithStubs("before step collection", {add: undefined, unshift: undefined, clear: undefined, asyncForEach: undefined});
-    afterStepCollection  = createSpyWithStubs("after step collection", {add: undefined, unshift: undefined, clear: undefined, asyncForEach: undefined});
-    spyOn(Cucumber.Type, 'Collection').and.returnValues(beforeStepCollection, afterStepCollection);
     spyOn(Cucumber.SupportCode, "Hook").and.returnValue(emptyHook);
     treeWalker           = Cucumber.Runtime.AstTreeWalker(features, supportCodeLibrary, listeners, options);
   });
